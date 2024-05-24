@@ -39,18 +39,18 @@ drivetrain->driveTo(pos(144 - 22, 144 - 22), 210, true, 0.6, 4, 15);
 ```
 This is a little more readable, but doesn't completely solve the problem. It also disconnects some of the parameters from the actual movement they're effecting, making it harder to find what parameter setters are effecting what. Next year I'm going to try define optional parameters with structs, which should hopefully solve the problem. Here's what that will look like:
 ```cpp
-drivetrain->driveTo(pos(144 - 22, 144 - 22), 210, { reverse: true, angle_correction: 15 });
+drivetrain->driveTo(pos(144 - 22, 144 - 22), 210, { reverse: true, angle_correction: 15, timeout: 2000 });
 ```
 
 ### Movement functions
 I want to add more gradual acceleration/deceleration to prevent wheel slipping, which should make autos more consistent. I also want to experiement with other drive-to-point functions to see if they could work better then boomerang (I've found two other ones so far), and also maybe revist pure pursuit to see if I can get it easier to work with. 
 
-I also want to add more configurable end conditions for movements, ie end when near a point or near an angle. This is technically possible in the current code but it is a little finicky/hacky, it would be good if it was more of a built in feature. I also want to see if I can get the end conditions to chain better into the movements after them to make routes smoother
+Another thing I'll try to add is more configurable end conditions for movements, ie end when near a point or near an angle. This is technically possible in the current code but it is a little finicky/hacky, it would be good if it was more of a built in feature. I'm going to try to see if I can get the end conditions to chain movements better too, to make routes smoother
 
 ### Odometry
 If I have time I may also try to make a Kalman filter to combine data from the GPS strips and the tracking wheel odometry to get more accurate and less drifty odometry.
 
-### On the fly rerouting
+### Quick rerouting
 It would be cool to be able to modify the auto route using the brain screen immediately before a match based on what our alliance partner or opponents are doing. I don't know how complicated I want to make this (or if I will do it at all), but if I have time and come up with a good system for it I may do it
 
 ### Dependency Injection and Composition
